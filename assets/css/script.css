@@ -1,0 +1,55 @@
+/* スクリプトに関するcss */
+
+/* ＝＝＝＝＝パララックス＝＝＝＝＝ */
+/* .service-item {
+    opacity: 0;
+    transform: translateY(50px);
+} */
+
+/* ＝＝＝＝＝著名人インタビューのスライド＝＝＝＝＝ */
+.interview-swiper {
+    max-width: 100%;
+    height: calc(100vh / 1.3);
+}
+
+@media screen and (max-width: 768px) {
+    .interview-swiper {
+        height: calc(100vh / 2);
+    }
+}
+
+/* ＝＝＝＝＝本のスライド＝＝＝＝＝ */
+.bookshelf-container .swiper {
+    width: 100%;
+    height: auto;
+}
+/* スライドの動き等速 */
+.bookshelf-swiper {
+    transition-timing-function: linear;
+}
+/* 画像のサイズ調整 */
+.bookshelf-swiper img {
+    height: auto;
+    width: 100%;
+}
+
+/* ＝＝＝＝＝タイピングアニメーション＝＝＝＝＝ */
+/* タイピングアニメーション点滅 */
+.typing_animation::after {
+    content: "";
+    border-right: 2px solid var(--black);
+    margin-left: 5px;
+    animation: flashing 1s linear infinite;
+    opacity: 0;
+}
+
+@keyframes flashing {
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
