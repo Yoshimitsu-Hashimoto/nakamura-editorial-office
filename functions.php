@@ -43,10 +43,10 @@ function nakamura_enqueue_assets() {
         '1.0.0'
     );
     
-    // メインスタイル
+    // メインスタイル（assets/css/style.css）
     wp_enqueue_style(
-        'nakamura-style',
-        get_stylesheet_uri(),
+        'nakamura-main-style',
+        get_template_directory_uri() . '/assets/css/style.css',
         array('nakamura-google-fonts'),
         '1.0.0'
     );
@@ -55,28 +55,28 @@ function nakamura_enqueue_assets() {
     wp_enqueue_style(
         'nakamura-header',
         get_template_directory_uri() . '/assets/css/header.css',
-        array('nakamura-style'),
+        array('nakamura-main-style'),
         '1.0.0'
     );
     
     wp_enqueue_style(
         'nakamura-footer',
         get_template_directory_uri() . '/assets/css/footer.css',
-        array('nakamura-style'),
+        array('nakamura-main-style'),
         '1.0.0'
     );
     
     wp_enqueue_style(
         'nakamura-contact',
         get_template_directory_uri() . '/assets/css/contact.css',
-        array('nakamura-style'),
+        array('nakamura-main-style'),
         '1.0.0'
     );
     
     wp_enqueue_style(
         'nakamura-script',
         get_template_directory_uri() . '/assets/css/script.css',
-        array('nakamura-style'),
+        array('nakamura-main-style'),
         '1.0.0'
     );
     
@@ -521,16 +521,28 @@ function nakamura_register_custom_fields() {
         // 10. ブックライティング (10個固定)
         $bookwriting_items = array(
             1 => array(
-                'title' => 'サンプルブックライティング 1',
-                'link' => 'https://example.com/bookwriting1'
+                'title' => '収入の9割はマネースクリプトで決まる（メンタリストDaiGo / KADOKAWA）',
+                'link' => 'https://www.amazon.co.jp/'
             ),
             2 => array(
-                'title' => 'サンプルブックライティング 2',
-                'link' => 'https://example.com/bookwriting2'
+                'title' => '心理学で学ぶ人を動かす文章術（KADOKAWA）',
+                'link' => 'https://www.amazon.co.jp/'
             ),
             3 => array(
-                'title' => 'サンプルブックライティング 3',
-                'link' => 'https://example.com/bookwriting3'
+                'title' => '超効率的な文章の書き方（ダイヤモンド社）',
+                'link' => 'https://www.amazon.co.jp/'
+            ),
+            4 => array(
+                'title' => 'ビジネス文書の極意（日本経済新聞出版）',
+                'link' => 'https://www.amazon.co.jp/'
+            ),
+            5 => array(
+                'title' => 'Web文章の教科書（技術評論社）',
+                'link' => 'https://www.amazon.co.jp/'
+            ),
+            6 => array(
+                'title' => 'コピーライティングの真実（翔泳社）',
+                'link' => 'https://www.amazon.co.jp/'
             ),
         );
         

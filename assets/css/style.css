@@ -95,7 +95,7 @@ a {
 }
 .h2title::after {
     content: "";
-    background-image: url(../Designimage/marker.png);
+    background-image: url(../images/marker.png);
     background-size: 100%;
     background-repeat: no-repeat;
     display: block;
@@ -270,7 +270,7 @@ a {
 /* ヒーローセクション */
 #hero {
     height: calc(100vh - 40px);
-    background-image: url("../Designimage/houganbk.png");
+    background-image: url("../images/houganbk.png");
     background-size: 40px 40px;
     background-position: center;
     background-repeat: repeat;
@@ -336,7 +336,7 @@ h1::before {
 }
 .catchphrase::after {
     content: "";
-    background-image: url(../Designimage/marker.png);
+    background-image: url(../images/marker.png);
     background-size: 100%;
     background-repeat: no-repeat;
     display: block;
@@ -519,7 +519,7 @@ h1::before {
 }
 /* 実績セクション */
 #works {
-    background-image: url("../Designimage/houganbk.png");
+    background-image: url("../images/houganbk.png");
     background-size: 40px 40px;
     background-position: center;
     background-repeat: repeat;

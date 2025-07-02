@@ -14,9 +14,11 @@ document.addEventListener('DOMContentLoaded', function () {
         slidesPerView: 5,
       },
     },
-    speed: 20000,
+    speed: 3000,
     autoplay: {
-      delay: 0,
+      delay: 1000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
     },
     navigation: {
       nextEl: '.bookshelf-container .swiper-button-next',
@@ -29,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const prevBtn = document.querySelector('.bookshelf-container .swiper-button-prev');
 
   const fastSpeed = 500;
-  const slowSpeed = 20000;
+  const slowSpeed = 3000;
 
   function moveNext() {
     swiper.params.speed = fastSpeed;
