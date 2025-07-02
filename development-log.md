@@ -109,21 +109,76 @@ function nakamura_test_data_callback($post) {
 - ACF update_field の結果
 - フォールバック処理の結果
 
-### 8. 本番運用への準備
+### 8. システム変更：JSONからデフォルト値へ
 
-#### 削除対象（本番運用時）
-1. **ファイル**: 
-   - `test-data.json`
-   - `development-log.md`
+#### 変更の背景
+**ユーザー要望**: 「テストデータがよみこめない。jsonのよみこみやめて、デフォルト値でセットしちゃってください」
 
-2. **関数**:
+#### 実装した変更（2025年7月2日）
+1. **test-data.json削除**: 外部ファイル依存を廃止
+2. **テストデータ関数群削除**: 約300行のコード削除
+   - `nakamura_load_test_data()`
    - `nakamura_auto_load_test_data()`
    - `nakamura_add_test_data_status_box()`
    - `nakamura_test_data_callback()`
    - `nakamura_handle_reset_test_data()`
-   - `nakamura_load_test_data()`
+   - `nakamura_handle_test_data()`
+   - `nakamura_show_test_data_messages()`
 
-3. **メタボックス関連のadd_action**
+3. **デフォルト値システム実装**:
+   ```php
+   $all_fields[] = array(
+       'key' => 'field_hero_catchphrase',
+       'default_value' => '編集の力で"伝える"をお手伝いします。',
+   );
+   ```
+
+#### ACFデフォルト値の問題と解決
+
+##### 問題1: デフォルト値が表示されない
+**原因**: 
+- 配列インデックスエラー（`$services[$i]`が存在しない）
+- 既存カスタムフィールドデータとの競合
+- ACF設定更新が反映されない
+
+**解決策**:
+```php
+// 1. 配列アクセスの安全化
+$service_data = isset($services[$i]) ? $services[$i] : array('title' => "サンプルサービス{$i}", 'description' => "サンプルサービス{$i}の説明文です。");
+
+// 2. ACF load_valueフィルターで強制設定
+function nakamura_set_acf_default_values($value, $post_id, $field) {
+    if (empty($value) && isset($field['default_value']) && !empty($field['default_value'])) {
+        return $field['default_value'];
+    }
+    return $value;
+}
+add_filter('acf/load_value', 'nakamura_set_acf_default_values', 10, 3);
+```
+
+##### 完了したデフォルト値設定
+- **ヒーロー**: キャッチフレーズ
+- **ミッション**: 完全なHTML内容
+- **サービス**: 5つの実サービス内容
+- **著書**: 2冊の実書籍情報
+- **メディア掲載**: 3件の実メディア情報
+- **講演・登壇**: 3件のサンプルイベント
+- **Webメディア**: 3つの実メディア（幻冬舎ゴールドオンライン等）
+- **メッセージ**: 代表メッセージとプロフィール
+- **会社概要**: 完全な会社情報
+
+### 9. 本番運用への準備
+
+#### 削除完了（2025年7月2日）
+1. **ファイル**: 
+   - ~~`test-data.json`~~ ✓削除済み
+
+2. **関数**: ✓すべて削除済み
+   - ~~`nakamura_auto_load_test_data()`~~
+   - ~~`nakamura_add_test_data_status_box()`~~
+   - ~~`nakamura_test_data_callback()`~~
+   - ~~`nakamura_handle_reset_test_data()`~~
+   - ~~`nakamura_load_test_data()`~~
 
 #### 保持対象
 - カスタムフィールド登録 (`nakamura_register_custom_fields()`)
@@ -137,9 +192,8 @@ function nakamura_test_data_callback($post) {
 nakamura-editorial-office/
 ├── style.css                 # テーマヘッダー + 統合CSS
 ├── index.php                 # メインテンプレート
-├── functions.php            # 全機能統合
-├── test-data.json          # テストデータ（本番時削除）
-├── development-log.md      # 開発記録（本番時削除）
+├── functions.php            # 全機能統合（デフォルト値内蔵）
+├── development-log.md      # 開発記録
 ├── theme-requirements.md   # 要件定義書
 ├── assets/
 │   ├── css/                # 分割CSSファイル
@@ -147,6 +201,8 @@ nakamura-editorial-office/
 │   └── images/             # 画像ファイル
 └── static/                 # 元の静的サイト（参考用）
 ```
+
+**変更点**: test-data.json削除、functions.phpにデフォルト値を内蔵化
 
 ## 技術スタック
 - **WordPress**: 6.x
@@ -184,6 +240,6 @@ nakamura-editorial-office/
 ---
 
 **作成日**: 2025年7月2日  
-**最終更新**: 2025年7月2日  
+**最終更新**: 2025年7月2日（デフォルト値システム実装完了）  
 **開発者**: Claude Code  
 **プロジェクト**: なかむら編集室 WordPress テーマ
