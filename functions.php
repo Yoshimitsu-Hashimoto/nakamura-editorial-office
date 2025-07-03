@@ -181,25 +181,49 @@ function nakamura_register_custom_fields() {
         // 全フィールドをページ表示順に統合
         $all_fields = array();
         
+        // 📱 トップページセクション
+        $all_fields[] = array(
+            'key' => 'tab_top_page',
+            'label' => '📱 トップページ',
+            'type' => 'tab',
+        );
+        
+        $all_fields[] = array(
+            'key' => 'message_top_page',
+            'label' => '',
+            'type' => 'message',
+            'message' => 'サイトの最上部に表示されるコンテンツを設定します。',
+        );
+        
         // 1. ヒーローセクション
         $all_fields[] = array(
             'key' => 'field_hero_catchphrase',
-            'label' => '1. ヒーロー キャッチフレーズ',
+            'label' => '🎯 ヒーロー - キャッチフレーズ',
             'name' => 'hero_catchphrase',
             'type' => 'text',
+            'instructions' => 'サイトの最上部に表示されるメインキャッチフレーズを入力してください。',
             'default_value' => '編集の力で"伝える"をお手伝いします。',
         );
         
         // 2. ミッションセクション
         $all_fields[] = array(
             'key' => 'field_mission_content',
-            'label' => '2. ミッション内容',
+            'label' => '📝 ミッション - 内容',
             'name' => 'mission_content',
             'type' => 'wysiwyg',
+            'instructions' => '会社のミッション・理念を説明するテキストです。HTMLタグも使用できます。',
             'tabs' => 'all',
             'toolbar' => 'full',
             'media_upload' => 1,
             'default_value' => '<p>今はコンテンツが溢れる時代。法人も個人も関係なく、多くの人がたくさんの記事を書き、動画を投稿し、SNSを運用しています。</p><p>一時期「現代人が1日に触れる情報量は江戸時代の１年分、平安時代の一生分」という投稿がSNSで話題になりました。</p><p>明確な根拠ないので真偽は不明ですが、頷く人も多いのではないでしょうか。それほど現代は情報に溢れているからです。</p><p>そんな時代において、自社、あるいは個人の「伝えたいこと」を「伝えたい人」に届けるのは非常に難しいと言えるでしょう。</p><p>何か伝えたいことがあっても、果たしてそれをどの媒体でどのように伝えるのか。ブログがいいのかSNSがいいのか、あるいは音声や動画、メルマガの方がいいのか？</p><p>一昔前はメールやチラシなど、選択肢が少なかったからこそ迷いは生じませんでした。しかし、コンテンツが溢れる現代においては、これらの判断が非常に難しいのです。</p><p>そんな状況だからこそ、弊社にお手伝いさせてください。</p><p><strong>「誰に」「何を」「どうやって」届けるか、編集の力をつかってサポート致します。</strong></p>',
+        );
+        
+        // サービスセクション説明
+        $all_fields[] = array(
+            'key' => 'message_services',
+            'label' => '🔧 サービス一覧',
+            'type' => 'message',
+            'message' => '提供している5つのサービスを設定します。サービス名と説明文を入力してください。',
         );
         
         // 3. サービスセクション (5個固定)
@@ -231,19 +255,43 @@ function nakamura_register_custom_fields() {
             
             $all_fields[] = array(
                 'key' => "field_service_{$i}_title",
-                'label' => "3-{$i}. サービス{$i} タイトル",
+                'label' => "🔧 サービス{$i} - タイトル",
                 'name' => "service_{$i}_title",
                 'type' => 'text',
+                'instructions' => 'サービス名を入力してください（例：Webメディアの記事ライティング）',
                 'default_value' => $service_data['title'],
             );
             $all_fields[] = array(
                 'key' => "field_service_{$i}_description",
-                'label' => "3-{$i}. サービス{$i} 説明",
+                'label' => "📄 サービス{$i} - 説明",
                 'name' => "service_{$i}_description",
                 'type' => 'textarea',
+                'instructions' => 'サービスの詳細説明を入力してください',
                 'default_value' => $service_data['description'],
             );
         }
+        
+        // 📚 登壇・出版セクション
+        $all_fields[] = array(
+            'key' => 'tab_publications',
+            'label' => '📚 登壇・出版',
+            'type' => 'tab',
+        );
+        
+        $all_fields[] = array(
+            'key' => 'message_publications',
+            'label' => '',
+            'type' => 'message',
+            'message' => '著書、メディア掲載、講演・登壇の実績を管理します。',
+        );
+        
+        // 著書セクション説明
+        $all_fields[] = array(
+            'key' => 'message_books',
+            'label' => '📖 著書一覧',
+            'type' => 'message',
+            'message' => '出版した書籍の情報を設定します。タイトル、出版社、発売日、購入リンク、表紙画像を入力してください。',
+        );
         
         // 4. 著書セクション (5個固定)
         $books = array(
@@ -266,39 +314,52 @@ function nakamura_register_custom_fields() {
             
             $all_fields[] = array(
                 'key' => "field_book_{$i}_title",
-                'label' => "4-{$i}. 著書{$i} タイトル",
+                'label' => "📚 著書{$i} - タイトル",
                 'name' => "book_{$i}_title",
                 'type' => 'text',
+                'instructions' => '書籍のタイトルを入力してください',
                 'default_value' => $book_data['title'],
             );
             $all_fields[] = array(
                 'key' => "field_book_{$i}_publisher",
-                'label' => "4-{$i}. 著書{$i} 出版社",
+                'label' => "🏢 著書{$i} - 出版社",
                 'name' => "book_{$i}_publisher",
                 'type' => 'text',
+                'instructions' => '出版社名を入力してください',
                 'default_value' => $book_data['publisher'],
             );
             $all_fields[] = array(
                 'key' => "field_book_{$i}_date",
-                'label' => "4-{$i}. 著書{$i} 発売日",
+                'label' => "📅 著書{$i} - 発売日",
                 'name' => "book_{$i}_date",
                 'type' => 'text',
+                'instructions' => '発売日を入力してください（例：2025年02月26日）',
                 'default_value' => $book_data['date'],
             );
             $all_fields[] = array(
                 'key' => "field_book_{$i}_link",
-                'label' => "4-{$i}. 著書{$i} リンク",
+                'label' => "🔗 著書{$i} - 購入リンク",
                 'name' => "book_{$i}_link",
                 'type' => 'url',
+                'instructions' => 'Amazonや書店の購入ページURLを入力してください',
                 'default_value' => $book_data['link'],
             );
             $all_fields[] = array(
                 'key' => "field_book_{$i}_image",
-                'label' => "4-{$i}. 著書{$i} 画像",
+                'label' => "🖼️ 著書{$i} - 表紙画像",
                 'name' => "book_{$i}_image",
                 'type' => 'image',
+                'instructions' => '書籍の表紙画像をアップロードしてください',
             );
         }
+        
+        // メディア掲載セクション説明
+        $all_fields[] = array(
+            'key' => 'message_media',
+            'label' => '📰 メディア掲載',
+            'type' => 'message',
+            'message' => 'メディアや書籍での掲載実績を設定します。掲載タイトルと該当ページのリンクを入力してください。',
+        );
         
         // 5. メディア掲載 (6個固定)
         $media_items = array(
@@ -321,19 +382,29 @@ function nakamura_register_custom_fields() {
             
             $all_fields[] = array(
                 'key' => "field_media_{$i}_title",
-                'label' => "5-{$i}. メディア掲載{$i} タイトル",
+                'label' => "📰 メディア{$i} - タイトル",
                 'name' => "media_{$i}_title",
                 'type' => 'text',
+                'instructions' => 'メディア掲載のタイトルを入力してください',
                 'default_value' => $media_data['title'],
             );
             $all_fields[] = array(
                 'key' => "field_media_{$i}_link",
-                'label' => "5-{$i}. メディア掲載{$i} リンク",
+                'label' => "🔗 メディア{$i} - リンク",
                 'name' => "media_{$i}_link",
                 'type' => 'url',
+                'instructions' => '掲載ページのURLを入力してください',
                 'default_value' => $media_data['link'],
             );
         }
+        
+        // 講演・登壇セクション説明
+        $all_fields[] = array(
+            'key' => 'message_speaking',
+            'label' => '🎤 講演・登壇',
+            'type' => 'message',
+            'message' => '講演・登壇の実績を設定します。種別（対談/セミナー/イベント）、タイトル、主催者、画像を入力してください。',
+        );
         
         // 6. 講演・登壇 (18個固定)
         $speaking_events = array(
@@ -359,9 +430,10 @@ function nakamura_register_custom_fields() {
             
             $all_fields[] = array(
                 'key' => "field_speaking_{$i}_type",
-                'label' => "6-{$i}. 講演{$i} 種別",
+                'label' => "🎤 講演{$i} - 種別",
                 'name' => "speaking_{$i}_type",
                 'type' => 'select',
+                'instructions' => '講演の種類を選択してください',
                 'choices' => array(
                     '対談' => '対談',
                     'セミナー' => 'セミナー',
@@ -371,25 +443,50 @@ function nakamura_register_custom_fields() {
             );
             $all_fields[] = array(
                 'key' => "field_speaking_{$i}_title",
-                'label' => "6-{$i}. 講演{$i} タイトル",
+                'label' => "📝 講演{$i} - タイトル",
                 'name' => "speaking_{$i}_title",
                 'type' => 'text',
+                'instructions' => '講演・登壇のタイトルを入力してください',
                 'default_value' => $speaking_data['title'],
             );
             $all_fields[] = array(
                 'key' => "field_speaking_{$i}_organizer",
-                'label' => "6-{$i}. 講演{$i} 主催者",
+                'label' => "🏢 講演{$i} - 主催者",
                 'name' => "speaking_{$i}_organizer",
                 'type' => 'text',
+                'instructions' => '主催した企業や団体名を入力してください',
                 'default_value' => $speaking_data['organizer'],
             );
             $all_fields[] = array(
                 'key' => "field_speaking_{$i}_image",
-                'label' => "6-{$i}. 講演{$i} 画像",
+                'label' => "🖼️ 講演{$i} - 画像",
                 'name' => "speaking_{$i}_image",
                 'type' => 'image',
+                'instructions' => '講演・登壇時の写真やスクリーンショットをアップロードしてください',
             );
         }
+        
+        // 🎯 実績セクション
+        $all_fields[] = array(
+            'key' => 'tab_works',
+            'label' => '🎯 制作実績',
+            'type' => 'tab',
+        );
+        
+        $all_fields[] = array(
+            'key' => 'message_works',
+            'label' => '',
+            'type' => 'message',
+            'message' => '各種インタビュー記事やブックライティングなどの制作実績を管理します。',
+        );
+        
+        // 著名人インタビューセクション説明
+        $all_fields[] = array(
+            'key' => 'message_famous_interviews',
+            'label' => '⭐ 著名人インタビュー',
+            'type' => 'message',
+            'message' => '著名人へのインタビュー記事の実績を設定します。',
+        );
         
         // 7. 著名人インタビュー (10個固定)
         $famous_interviews = array(
@@ -571,61 +668,98 @@ function nakamura_register_custom_fields() {
             );
         }
         
+        // Webメディア執筆セクション説明
+        $all_fields[] = array(
+            'key' => 'message_webmedia',
+            'label' => '🌐 Webメディア執筆',
+            'type' => 'message',
+            'message' => 'Webメディアでの執筆実績を設定します。メディア名・役割と該当ページのリンクを入力してください。',
+        );
+        
         // 11. Webメディア執筆
         $all_fields[] = array(
             'key' => 'field_webmedia_01_title',
-            'label' => '11-1. Webメディア1 タイトル',
+            'label' => '🌐 Webメディア1 - タイトル',
             'name' => 'webmedia_01_title',
             'type' => 'text',
+            'instructions' => 'メディア名と役割を入力してください（例：幻冬舎ゴールドオンラインさま 連載担当）',
             'default_value' => '幻冬舎ゴールドオンラインさま 連載担当',
         );
         $all_fields[] = array(
             'key' => 'field_webmedia_01_link',
-            'label' => '11-1. Webメディア1 リンク',
+            'label' => '🔗 Webメディア1 - リンク',
             'name' => 'webmedia_01_link',
             'type' => 'url',
+            'instructions' => 'メディアのURLを入力してください',
             'default_value' => 'https://gentosha-go.com/',
         );
         $all_fields[] = array(
             'key' => 'field_webmedia_02_title',
-            'label' => '11-2. Webメディア2 タイトル',
+            'label' => '🌐 Webメディア2 - タイトル',
             'name' => 'webmedia_02_title',
             'type' => 'text',
+            'instructions' => 'メディア名と役割を入力してください',
             'default_value' => '金融メディア『HEDGE GUIDE』さま　記事執筆',
         );
         $all_fields[] = array(
             'key' => 'field_webmedia_02_link',
-            'label' => '11-2. Webメディア2 リンク',
+            'label' => '🔗 Webメディア2 - リンク',
             'name' => 'webmedia_02_link',
             'type' => 'url',
+            'instructions' => 'メディアのURLを入力してください',
             'default_value' => 'https://hedge.guide/',
         );
         $all_fields[] = array(
             'key' => 'field_webmedia_03_title',
-            'label' => '11-3. Webメディア3 タイトル',
+            'label' => '🌐 Webメディア3 - タイトル',
             'name' => 'webmedia_03_title',
             'type' => 'text',
+            'instructions' => 'メディア名と役割を入力してください',
             'default_value' => '相続会議（朝日新聞社）さま　記事執筆',
         );
         $all_fields[] = array(
             'key' => 'field_webmedia_03_link',
-            'label' => '11-3. Webメディア3 リンク',
+            'label' => '🔗 Webメディア3 - リンク',
             'name' => 'webmedia_03_link',
             'type' => 'url',
+            'instructions' => 'メディアのURLを入力してください',
             'default_value' => 'https://souzoku.asahi.com/',
         );
         $all_fields[] = array(
             'key' => 'field_webmedia_note',
-            'label' => '11-4. 追記テキスト',
+            'label' => '📝 追記テキスト',
             'name' => 'webmedia_note',
             'type' => 'text',
+            'instructions' => '総執筆記事数などの追加情報を入力してください',
             'default_value' => '他、合計4,300記事以上を執筆',
+        );
+        
+        // 🏢 会社情報セクション
+        $all_fields[] = array(
+            'key' => 'tab_company',
+            'label' => '🏢 会社情報',
+            'type' => 'tab',
+        );
+        
+        $all_fields[] = array(
+            'key' => 'message_company',
+            'label' => '',
+            'type' => 'message',
+            'message' => '代表メッセージ、プロフィール、会社概要などの基本情報を管理します。',
+        );
+        
+        // メッセージセクション説明
+        $all_fields[] = array(
+            'key' => 'message_greeting',
+            'label' => '💬 代表メッセージ',
+            'type' => 'message',
+            'message' => '代表からのご挨拶とプロフィール情報を設定します。',
         );
         
         // 12. メッセージセクション
         $all_fields[] = array(
             'key' => 'field_message_content',
-            'label' => '12-1. メッセージ内容',
+            'label' => '💬 代表メッセージ - 内容',
             'name' => 'message_content',
             'type' => 'wysiwyg',
             'tabs' => 'all',
@@ -635,7 +769,7 @@ function nakamura_register_custom_fields() {
         );
         $all_fields[] = array(
             'key' => 'field_profile_content',
-            'label' => '12-2. プロフィール内容',
+            'label' => '👤 代表プロフィール - 内容',
             'name' => 'profile_content',
             'type' => 'wysiwyg',
             'tabs' => 'all',
@@ -645,72 +779,80 @@ function nakamura_register_custom_fields() {
         );
         $all_fields[] = array(
             'key' => 'field_portfolio_link',
-            'label' => '12-3. ポートフォリオリンク',
+            'label' => '🔗 ポートフォリオ - リンク',
             'name' => 'portfolio_link',
             'type' => 'url',
             'default_value' => 'https://nakamura-editing.co.jp/writer/',
         );
         $all_fields[] = array(
             'key' => 'field_community_link',
-            'label' => '12-4. コミュニティリンク',
+            'label' => '🔗 コミュニティ - リンク',
             'name' => 'community_link',
             'type' => 'url',
             'default_value' => 'https://webwriterlab-line.com/',
         );
         
+        // 会社概要セクション説明
+        $all_fields[] = array(
+            'key' => 'message_company_info',
+            'label' => '🏢 会社概要',
+            'type' => 'message',
+            'message' => '会社の基本情報を設定します。会社名、代表者、所在地、事業内容などを入力してください。',
+        );
+        
         // 13. 会社概要
         $all_fields[] = array(
             'key' => 'field_company_name',
-            'label' => '13-1. 会社名',
+            'label' => '🏢 会社名',
             'name' => 'company_name',
             'type' => 'text',
             'default_value' => 'なかむら編集室',
         );
         $all_fields[] = array(
             'key' => 'field_company_representative',
-            'label' => '13-2. 代表者名',
+            'label' => '👤 代表者名',
             'name' => 'company_representative',
             'type' => 'text',
             'default_value' => '中村 昌弘',
         );
         $all_fields[] = array(
             'key' => 'field_company_established',
-            'label' => '13-3. 設立日',
+            'label' => '📅 設立日',
             'name' => 'company_established',
             'type' => 'text',
             'default_value' => '2022年6月6日',
         );
         $all_fields[] = array(
             'key' => 'field_company_address',
-            'label' => '13-4. 所在地',
+            'label' => '📍 所在地',
             'name' => 'company_address',
             'type' => 'text',
             'default_value' => '東京都新宿区西新宿三丁目3番13号　西新宿水間ビル6階',
         );
         $all_fields[] = array(
             'key' => 'field_company_email',
-            'label' => '13-5. メールアドレス',
+            'label' => '📧 メールアドレス',
             'name' => 'company_email',
             'type' => 'email',
             'default_value' => 'freelance.nakamura@gmail.com',
         );
         $all_fields[] = array(
             'key' => 'field_company_business_01',
-            'label' => '13-6. 事業内容1',
+            'label' => '🔧 事業内容1',
             'name' => 'company_business_01',
             'type' => 'text',
             'default_value' => 'Webメディアの企画・制作・運営・コンサルティング業務',
         );
         $all_fields[] = array(
             'key' => 'field_company_business_02',
-            'label' => '13-7. 事業内容2',
+            'label' => '🔧 事業内容2',
             'name' => 'company_business_02',
             'type' => 'text',
             'default_value' => '書籍の企画・編集業務',
         );
         $all_fields[] = array(
             'key' => 'field_company_business_03',
-            'label' => '13-8. 事業内容3',
+            'label' => '🔧 事業内容3',
             'name' => 'company_business_03',
             'type' => 'text',
             'default_value' => '法人向け講座の提供',
@@ -719,7 +861,7 @@ function nakamura_register_custom_fields() {
         // 統合フィールドグループ
         acf_add_local_field_group(array(
             'key' => 'group_nakamura_all',
-            'title' => 'なかむら編集室 全コンテンツ（ページ表示順）',
+            'title' => '🏠 なかむら編集室 - サイトコンテンツ管理',
             'fields' => $all_fields,
             'location' => array(
                 array(
