@@ -138,15 +138,16 @@
                 <div class="titleArea UpEffect">
                     <h3 class="h3title">著　書</h3>
                 </div>
-                <?php for ($i = 1; $i <= 5; $i++): ?>
-                    <?php 
-                    $book_title = get_field("book_{$i}_title");
-                    $book_publisher = get_field("book_{$i}_publisher");
-                    $book_date = get_field("book_{$i}_date");
-                    $book_link = get_field("book_{$i}_link");
-                    $book_image = get_field("book_{$i}_image");
+                <?php 
+                $books_group = get_field('group_books_all');
+                for ($i = 1; $i <= 5; $i++): 
+                    $book_title = $books_group ? $books_group["book_{$i}_title"] : '';
+                    $book_publisher = $books_group ? $books_group["book_{$i}_publisher"] : '';
+                    $book_date = $books_group ? $books_group["book_{$i}_date"] : '';
+                    $book_link = $books_group ? $books_group["book_{$i}_link"] : '';
+                    $book_image = $books_group ? $books_group["book_{$i}_image"] : '';
                     if ($book_title):
-                    ?>
+                ?>
                     <div class="mybook-item UpEffect">
                         <div class="mybook-book-container">
                             <?php if ($book_image): ?>
